@@ -15,6 +15,10 @@
 
 /out/*.*
 
+# IDEA plugins
+# -------
+amplicode.xml
+
 
 # Eclipse
 # -------
