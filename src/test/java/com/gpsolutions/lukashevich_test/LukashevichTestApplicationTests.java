@@ -1,0 +1,13 @@
+package com.gpsolutions.lukashevich_test;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class LukashevichTestApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
