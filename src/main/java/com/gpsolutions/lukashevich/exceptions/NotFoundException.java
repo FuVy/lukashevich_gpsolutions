@@ -1,6 +1,6 @@
-package com.gpsolutions.lukashevich_test.exceptions;
+package com.gpsolutions.lukashevich.exceptions;
 
-import com.gpsolutions.lukashevich_test.domain.search.FailedSearchItem;
+import com.gpsolutions.lukashevich.domain.search.FailedSearchItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

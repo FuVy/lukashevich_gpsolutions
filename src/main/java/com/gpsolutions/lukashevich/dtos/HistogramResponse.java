@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test.dtos;
+package com.gpsolutions.lukashevich.dtos;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.Value;

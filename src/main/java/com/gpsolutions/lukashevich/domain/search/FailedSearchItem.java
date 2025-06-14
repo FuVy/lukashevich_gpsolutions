@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test.domain.search;
+package com.gpsolutions.lukashevich.domain.search;
 
 import lombok.Value;
 

@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test;
+package com.gpsolutions.lukashevich;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

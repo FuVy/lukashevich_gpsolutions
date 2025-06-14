@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test.dtos;
+package com.gpsolutions.lukashevich.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;

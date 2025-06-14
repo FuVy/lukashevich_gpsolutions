@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test.entities;
+package com.gpsolutions.lukashevich.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

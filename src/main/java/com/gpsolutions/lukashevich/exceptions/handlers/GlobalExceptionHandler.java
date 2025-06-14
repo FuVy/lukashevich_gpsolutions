@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich_test.exceptions.handlers;
+package com.gpsolutions.lukashevich.exceptions.handlers;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.MessageSourceResolvable;
