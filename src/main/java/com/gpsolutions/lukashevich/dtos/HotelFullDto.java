@@ -8,7 +8,7 @@ import lombok.Value;
 import java.util.List;
 
 @Value
-public class HotelDto {
+public class HotelFullDto {
     Long id;
     @NotNull(message = "Name can't be null.")
     @NotEmpty(message = "Name can't be empty.")

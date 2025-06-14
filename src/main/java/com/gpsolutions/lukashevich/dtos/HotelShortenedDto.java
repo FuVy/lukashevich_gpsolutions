@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 @Value
-public class ShortenedHotelDto {
+public class HotelShortenedDto {
     Long id;
     @NotNull(message = "Name can't be null.")
     @NotEmpty(message = "Name can't be empty.")
