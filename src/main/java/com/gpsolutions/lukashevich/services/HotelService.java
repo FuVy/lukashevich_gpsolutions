@@ -65,6 +65,10 @@ public class HotelService {
 
     @Transactional
     private Hotel addAmenities(Hotel hotel, List<String> amenityNames) {
+        if (amenityNames == null) {
+            hotel.setAmenities(new ArrayList<>());
+            return hotelRepository.save(hotel);
+        }
         Set<String> existingAmenities = hotel.getAmenities().stream().map(x -> x.getAmenity().getName()).collect(Collectors.toSet());
         amenityNames = amenityNames.stream().filter(x -> !existingAmenities.contains(x)).toList();
         Set<Amenity> amenities = amenityService.findOrCreateAmenitiesByName(amenityNames);
