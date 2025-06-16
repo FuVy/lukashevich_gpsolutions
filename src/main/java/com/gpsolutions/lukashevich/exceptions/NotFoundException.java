@@ -8,6 +8,6 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class NotFoundException {
+public class NotFoundException extends RuntimeException {
     protected List<FailedSearchItem> failedItems;
 }
