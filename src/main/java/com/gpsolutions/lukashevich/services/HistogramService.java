@@ -1,14 +1,11 @@
 package com.gpsolutions.lukashevich.services;
 
-import com.gpsolutions.lukashevich.domain.search.FailedSearchItem;
-import com.gpsolutions.lukashevich.exceptions.NotFoundException;
 import com.gpsolutions.lukashevich.repositories.HotelAmenityItemRepository;
 import com.gpsolutions.lukashevich.repositories.HotelRepository;
 import com.gpsolutions.lukashevich.utils.converters.PairsConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,6 +27,6 @@ public class HistogramService {
         if (param.equalsIgnoreCase("amenities")) {
             return PairsConverter.toMap(hotelAmenityItemRepository.countHotelsByAmenity());
         }
-        throw new NotFoundException(List.of(new FailedSearchItem("param", param, "Invalid or unknown parameter given.")));
+        throw new IllegalArgumentException("Invalid or unknown parameter given.");
     }
 }

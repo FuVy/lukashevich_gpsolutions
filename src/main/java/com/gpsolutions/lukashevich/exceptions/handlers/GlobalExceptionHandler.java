@@ -93,4 +93,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<List<FailedSearchItem>> handleNotFoundErrors(NotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getFailedItems());
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleNotFoundErrors(IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }
