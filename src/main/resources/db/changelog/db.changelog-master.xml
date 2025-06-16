@@ -68,7 +68,7 @@
                 <constraints nullable="false" foreignKeyName="fk_hotel_amenities_amenity" references="amenities(id)"/>
             </column>
         </createTable>
-        <addUniqueConstraint tableName="hotel_amenities" columnNames="hotel_id, amenity_id" constraintName="uc_hotel_amenity"/>
+        <addUniqueConstraint tableName="hotel_amenities" columnNames="id" constraintName="uc_hotel_amenity"/>
     </changeSet>
 
 </databaseChangeLog>
