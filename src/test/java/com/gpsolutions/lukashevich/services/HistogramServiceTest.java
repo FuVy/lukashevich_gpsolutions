@@ -29,18 +29,18 @@ class HistogramServiceTest {
 
     @Test
     void getHistogramByParameter_brand_shouldReturnBrandHistogram() {
-        List<Pair<String, Integer>> brandPairs = List.of(
-                Pair.of("Hilton", 5),
-                Pair.of("Sigma", 3)
+        List<Pair<String, Long>> brandPairs = List.of(
+                Pair.of("Hilton", 5L),
+                Pair.of("Sigma", 3L)
         );
         when(hotelRepository.countHotelsByBrand()).thenReturn(brandPairs);
 
-        Map<String, Integer> result = histogramService.getHistogramByParameter("brand");
+        Map<String, Long> result = histogramService.getHistogramByParameter("brand");
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(2);
-        assertThat(result).containsEntry("Hilton", 5);
-        assertThat(result).containsEntry("Sigma", 3);
+        assertThat(result).containsEntry("Hilton", 5L);
+        assertThat(result).containsEntry("Sigma", 3L);
         verify(hotelRepository).countHotelsByBrand();
         verify(hotelRepository, never()).countHotelsByCity();
         verify(hotelAmenityItemRepository, never()).countHotelsByAmenity();
@@ -48,18 +48,18 @@ class HistogramServiceTest {
 
     @Test
     void getHistogramByParameter_city_shouldReturnCityHistogram() {
-        List<Pair<String, Integer>> cityPairs = List.of(
-                Pair.of("Minsk", 10),
-                Pair.of("Warsaw", 7)
+        List<Pair<String, Long>> cityPairs = List.of(
+                Pair.of("Minsk", 10L),
+                Pair.of("Warsaw", 7L)
         );
         when(hotelRepository.countHotelsByCity()).thenReturn(cityPairs);
 
-        Map<String, Integer> result = histogramService.getHistogramByParameter("city");
+        Map<String, Long> result = histogramService.getHistogramByParameter("city");
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(2);
-        assertThat(result).containsEntry("Minsk", 10);
-        assertThat(result).containsEntry("Warsaw", 7);
+        assertThat(result).containsEntry("Minsk", 10L);
+        assertThat(result).containsEntry("Warsaw", 7L);
         verify(hotelRepository).countHotelsByCity();
         verify(hotelRepository, never()).countHotelsByBrand();
         verify(hotelAmenityItemRepository, never()).countHotelsByAmenity();
@@ -67,18 +67,18 @@ class HistogramServiceTest {
 
     @Test
     void getHistogramByParameter_country_shouldReturnCountryHistogram() {
-        List<Pair<String, Integer>> countryPairs = List.of(
-                Pair.of("Belarus", 15),
-                Pair.of("Poland", 12)
+        List<Pair<String, Long>> countryPairs = List.of(
+                Pair.of("Belarus", 15L),
+                Pair.of("Poland", 12L)
         );
         when(hotelRepository.countHotelsByCountry()).thenReturn(countryPairs);
 
-        Map<String, Integer> result = histogramService.getHistogramByParameter("country");
+        Map<String, Long> result = histogramService.getHistogramByParameter("country");
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(2);
-        assertThat(result).containsEntry("Belarus", 15);
-        assertThat(result).containsEntry("Poland", 12);
+        assertThat(result).containsEntry("Belarus", 15L);
+        assertThat(result).containsEntry("Poland", 12L);
         verify(hotelRepository).countHotelsByCountry();
         verify(hotelRepository, never()).countHotelsByCity();
         verify(hotelAmenityItemRepository, never()).countHotelsByAmenity();
@@ -86,18 +86,18 @@ class HistogramServiceTest {
 
     @Test
     void getHistogramByParameter_amenities_shouldReturnAmenitiesHistogram() {
-        List<Pair<String, Integer>> amenityPairs = List.of(
-                Pair.of("Free WiFi", 20),
-                Pair.of("Pool", 8)
+        List<Pair<String, Long>> amenityPairs = List.of(
+                Pair.of("Free WiFi", 20L),
+                Pair.of("Pool", 8L)
         );
         when(hotelAmenityItemRepository.countHotelsByAmenity()).thenReturn(amenityPairs);
 
-        Map<String, Integer> result = histogramService.getHistogramByParameter("amenities");
+        Map<String, Long> result = histogramService.getHistogramByParameter("amenities");
 
         assertThat(result).isNotNull();
         assertThat(result).hasSize(2);
-        assertThat(result).containsEntry("Free WiFi", 20);
-        assertThat(result).containsEntry("Pool", 8);
+        assertThat(result).containsEntry("Free WiFi", 20L);
+        assertThat(result).containsEntry("Pool", 8L);
         verify(hotelAmenityItemRepository).countHotelsByAmenity();
         verify(hotelRepository, never()).countHotelsByBrand();
     }

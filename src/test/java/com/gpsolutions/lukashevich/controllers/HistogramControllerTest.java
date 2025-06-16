@@ -26,9 +26,9 @@ class HistogramControllerTest {
 
     @Test
     void generateHistogram_cityParam_shouldReturnCityHistogram() throws Exception {
-        Map<String, Integer> expectedHistogram = new HashMap<>();
-        expectedHistogram.put("Minsk", 1);
-        expectedHistogram.put("Moscow", 2);
+        Map<String, Long> expectedHistogram = new HashMap<>();
+        expectedHistogram.put("Minsk", 1L);
+        expectedHistogram.put("Moscow", 2L);
 
         when(histogramService.getHistogramByParameter("city")).thenReturn(expectedHistogram);
 
@@ -42,9 +42,9 @@ class HistogramControllerTest {
 
     @Test
     void generateHistogram_countryParam_shouldReturnCountryHistogram() throws Exception {
-        Map<String, Integer> expectedHistogram = new HashMap<>();
-        expectedHistogram.put("Belarus", 1);
-        expectedHistogram.put("Poland", 5);
+        Map<String, Long> expectedHistogram = new HashMap<>();
+        expectedHistogram.put("Belarus", 1L);
+        expectedHistogram.put("Poland", 5L);
 
         when(histogramService.getHistogramByParameter("country")).thenReturn(expectedHistogram);
 
@@ -58,9 +58,9 @@ class HistogramControllerTest {
 
     @Test
     void generateHistogram_brandParam_shouldReturnBrandHistogram() throws Exception {
-        Map<String, Integer> expectedHistogram = new HashMap<>();
-        expectedHistogram.put("Hilton", 3);
-        expectedHistogram.put("Sigma", 1);
+        Map<String, Long> expectedHistogram = new HashMap<>();
+        expectedHistogram.put("Hilton", 3L);
+        expectedHistogram.put("Sigma", 1L);
 
         when(histogramService.getHistogramByParameter("brand")).thenReturn(expectedHistogram);
 
@@ -74,9 +74,9 @@ class HistogramControllerTest {
 
     @Test
     void generateHistogram_amenitiesParam_shouldReturnAmenitiesHistogram() throws Exception {
-        Map<String, Integer> expectedHistogram = new HashMap<>();
-        expectedHistogram.put("Free WiFi", 10);
-        expectedHistogram.put("Free parking", 5);
+        Map<String, Long> expectedHistogram = new HashMap<>();
+        expectedHistogram.put("Free WiFi", 10L);
+        expectedHistogram.put("Free parking", 5L);
 
         when(histogramService.getHistogramByParameter("amenities")).thenReturn(expectedHistogram);
 

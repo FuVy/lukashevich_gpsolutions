@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface HotelAmenityItemRepository extends JpaRepository<HotelAmenityItem, Long> {
     @Query("SELECT pair.amenity.name, COUNT(DISTINCT pair.hotel.id) FROM HotelAmenityItem pair GROUP BY pair.amenity.name")
-    List<Pair<String, Integer>> countHotelsByAmenity();
+    List<Pair<String, Long>> countHotelsByAmenity();
 }

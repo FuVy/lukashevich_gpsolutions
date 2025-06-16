@@ -14,7 +14,7 @@ public class HistogramService {
     private final HotelRepository hotelRepository;
     private final HotelAmenityItemRepository hotelAmenityItemRepository;
 
-    public Map<String, Integer> getHistogramByParameter(String param) {
+    public Map<String, Long> getHistogramByParameter(String param) {
         if (param.equalsIgnoreCase("brand")) {
             return PairsConverter.toMap(hotelRepository.countHotelsByBrand());
         }
