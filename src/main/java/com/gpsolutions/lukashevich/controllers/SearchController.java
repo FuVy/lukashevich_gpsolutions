@@ -2,6 +2,11 @@ package com.gpsolutions.lukashevich.controllers;
 
 import com.gpsolutions.lukashevich.dtos.HotelShortenedDto;
 import com.gpsolutions.lukashevich.services.SearchService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +22,12 @@ import java.util.List;
 public class SearchController {
     private final SearchService searchService;
 
+    @Operation(summary = "Search hotels")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = HotelShortenedDto[].class)))
+    })
     @GetMapping
     public ResponseEntity<List<HotelShortenedDto>> search(
             @RequestParam(value = "name", required = false)
