@@ -1,7 +1,11 @@
 package com.gpsolutions.lukashevich.exceptions.handlers;
 
+import com.gpsolutions.lukashevich.domain.search.FailedSearchItem;
+import com.gpsolutions.lukashevich.exceptions.NotFoundException;
 import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
@@ -16,9 +20,11 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(TransactionSystemException.class)
@@ -75,5 +81,16 @@ public class GlobalExceptionHandler {
                         FieldError::getField,
                         y -> y.getDefaultMessage() == null ? "" : y.getDefaultMessage()
                 )));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleUnknownErrors(Exception e) {
+        log.error("An unexpected error occurred.", e);
+        return new ResponseEntity<>("An unexpected error occurred.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<List<FailedSearchItem>> handleNotFoundErrors(NotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getFailedItems());
     }
 }
