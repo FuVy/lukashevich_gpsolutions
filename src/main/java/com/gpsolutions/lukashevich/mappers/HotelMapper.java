@@ -10,7 +10,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring",
@@ -21,14 +20,18 @@ import java.util.stream.Collectors;
         })
 public interface HotelMapper {
     @Mapping(target = "amenities", source = "amenities", qualifiedByName = "mapAmenitiesToDto")
-    HotelFullDto hotelEntityToDto(Hotel hotel);
+    HotelFullDto toDto(Hotel hotel);
 
     @Mapping(target = "address", source = "address", qualifiedByName = "mapAddressToString")
     @Mapping(target = "phone", source = "contacts.phone")
     HotelShortenedDto toShortenedDto(Hotel hotel);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "amenities", ignore = true)
+    Hotel toEntityWithoutAmenities(HotelFullDto dto);
+
     @Named("mapAmenitiesToDto")
-    default List<String> mapAmenitiesToDto(Set<HotelAmenityItem> amenities) {
+    default List<String> mapAmenitiesToDto(List<HotelAmenityItem> amenities) {
         if (amenities == null) {
             return null;
         }
@@ -49,5 +52,4 @@ public interface HotelMapper {
                 address.getPostCode(),
                 address.getCountry());
     }
-
 }
