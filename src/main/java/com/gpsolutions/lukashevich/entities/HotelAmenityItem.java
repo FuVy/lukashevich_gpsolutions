@@ -13,7 +13,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@RequiredArgsConstructor
 public class HotelAmenityItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +24,11 @@ public class HotelAmenityItem {
     @ManyToOne
     @JoinColumn(name = "amenity_id", nullable = false)
     private Amenity amenity;
+
+    public HotelAmenityItem(Hotel hotel, Amenity amenity) {
+        this.hotel = hotel;
+        this.amenity = amenity;
+    }
 
     @Override
     public final boolean equals(Object o) {
