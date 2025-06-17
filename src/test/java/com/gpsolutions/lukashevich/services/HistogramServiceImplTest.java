@@ -2,6 +2,8 @@ package com.gpsolutions.lukashevich.services;
 
 import com.gpsolutions.lukashevich.repositories.HotelAmenityItemRepository;
 import com.gpsolutions.lukashevich.repositories.HotelRepository;
+import com.gpsolutions.lukashevich.services.Jpa.HistogramServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class HistogramServiceTest {
+class HistogramServiceImplTest {
     @Mock
     private HotelRepository hotelRepository;
 
@@ -25,7 +27,12 @@ class HistogramServiceTest {
     private HotelAmenityItemRepository hotelAmenityItemRepository;
 
     @InjectMocks
-    private HistogramService histogramService;
+    private HistogramServiceImpl histogramService;
+
+    @BeforeEach
+    void setUp() {
+        histogramService.init();
+    }
 
     @Test
     void getHistogramByParameter_brand_shouldReturnBrandHistogram() {

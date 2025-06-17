@@ -1,9 +1,12 @@
 package com.gpsolutions.lukashevich.services;
 
 import com.gpsolutions.lukashevich.dtos.HotelShortenedDto;
+import com.gpsolutions.lukashevich.dtos.SearchDto;
 import com.gpsolutions.lukashevich.entities.*;
 import com.gpsolutions.lukashevich.mappers.HotelMapper;
 import com.gpsolutions.lukashevich.repositories.HotelRepository;
+import com.gpsolutions.lukashevich.repositories.specification.HotelSpecificationMapper;
+import com.gpsolutions.lukashevich.services.Jpa.SearchServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,19 +21,25 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SearchServiceTest {
+class SearchServiceImplTest {
     @Mock
     private HotelRepository hotelRepository;
 
     @Mock
     private HotelMapper hotelMapper;
 
+    @Mock
+    private HotelSpecificationMapper hotelSpecificationMapper;
+
     @InjectMocks
-    private SearchService searchService;
+    private SearchServiceImpl searchService;
+
+    @Mock
+    private Specification<Hotel> mockSpecification;
 
     private Hotel createTestHotel(Long id, String name, String brand, String city, String country, String... amenities) {
         Hotel hotel = new Hotel();
@@ -71,8 +80,9 @@ class SearchServiceTest {
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
         when(hotelMapper.toShortenedDto(hotel2)).thenReturn(dto2);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, null, null, null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, null, null, null));
 
         assertThat(result).isEqualTo(expectedDtos);
         verify(hotelRepository).findAll(any(Specification.class));
@@ -88,8 +98,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels("1", null, null, null, null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto("1", null, null, null, null));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -104,8 +115,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, "hilton", null, null, null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, "hilton", null, null, null));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -119,8 +131,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, "minsk", null, null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, "minsk", null, null));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -134,8 +147,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, null, "belarus", null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, null, "belarus", null));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -149,8 +163,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, null, null, "am1,am2");
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, null, null, "am1,am2"));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -164,8 +179,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels("1", "2", "3", "4", "spa");
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto("1", "2", "3", "4", "spa"));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -174,8 +190,9 @@ class SearchServiceTest {
     @Test
     void searchHotels_noMatchingHotels_shouldReturnEmptyList() {
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(Collections.emptyList());
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels("NonExistent", null, null, null, null);
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto("NonExistent", null, null, null, null));
 
         assertThat(result).isEmpty();
         verify(hotelRepository).findAll(any(Specification.class));
@@ -189,8 +206,9 @@ class SearchServiceTest {
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
         when(hotelMapper.toShortenedDto(hotel1)).thenReturn(dto1);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, null, null, " AM1 , Am2 ");
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, null, null, " AM1 , Am2 "));
 
         assertThat(result).isEqualTo(List.of(dto1));
         verify(hotelRepository).findAll(any(Specification.class));
@@ -202,12 +220,13 @@ class SearchServiceTest {
         List<Hotel> hotels = List.of(hotel1);
 
         when(hotelRepository.findAll(any(Specification.class))).thenReturn(hotels);
+        when(hotelSpecificationMapper.getHotelSpecification(any())).thenReturn(mockSpecification);
         when(hotelMapper.toShortenedDto(any(Hotel.class))).thenAnswer(invocation -> {
             Hotel hotel = invocation.getArgument(0);
             return createShortenedDto(hotel.getId(), hotel.getName(), hotel.getAddress().getHouseNumber() + " " + hotel.getAddress().getStreet() + ", " + hotel.getAddress().getCity() + ", " + hotel.getAddress().getPostCode() + ", " + hotel.getAddress().getCountry(), hotel.getContacts().getPhone());
         });
 
-        List<HotelShortenedDto> result = searchService.searchHotels(null, null, null, null, "Gym,Sauna");
+        List<HotelShortenedDto> result = searchService.searchHotels(new SearchDto(null, null, null, null, "Gym,Sauna"));
 
         assertThat(result).hasSize(1);
         assertThat(result.get(0).getName()).isEqualTo("Hotel 1");

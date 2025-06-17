@@ -6,6 +6,8 @@ import com.gpsolutions.lukashevich.exceptions.NotFoundException;
 import com.gpsolutions.lukashevich.mappers.HotelMapper;
 import com.gpsolutions.lukashevich.repositories.HotelAmenityItemRepository;
 import com.gpsolutions.lukashevich.repositories.HotelRepository;
+import com.gpsolutions.lukashevich.services.Jpa.AmenityServiceImpl;
+import com.gpsolutions.lukashevich.services.Jpa.HotelServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,9 +28,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class HotelServiceTest {
+class HotelServiceImplTest {
     @Mock
-    private AmenityService amenityService;
+    private AmenityServiceImpl amenityService;
 
     @Mock
     private HotelMapper hotelMapper;
@@ -40,7 +42,7 @@ class HotelServiceTest {
     private HotelAmenityItemRepository hotelAmenityItemRepository;
 
     @InjectMocks
-    private HotelService hotelService;
+    private HotelServiceImpl hotelService;
 
     private Hotel createTestHotel(Long id, String name, String brand, String description) {
         Hotel hotel = new Hotel();

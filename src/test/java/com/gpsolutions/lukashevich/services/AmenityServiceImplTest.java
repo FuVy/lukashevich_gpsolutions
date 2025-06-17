@@ -2,6 +2,7 @@ package com.gpsolutions.lukashevich.services;
 
 import com.gpsolutions.lukashevich.entities.Amenity;
 import com.gpsolutions.lukashevich.repositories.AmenityRepository;
+import com.gpsolutions.lukashevich.services.Jpa.AmenityServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,12 +17,12 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class AmenityServiceTest {
+class AmenityServiceImplTest {
     @Mock
     private AmenityRepository amenityRepository;
 
     @InjectMocks
-    private AmenityService amenityService;
+    private AmenityServiceImpl amenityService;
 
     @Test
     void findOrCreateAmenitiesByName_shouldReturnEmptySet_whenNamesIsNull() {

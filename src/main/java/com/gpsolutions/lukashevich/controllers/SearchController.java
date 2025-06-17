@@ -1,6 +1,7 @@
 package com.gpsolutions.lukashevich.controllers;
 
 import com.gpsolutions.lukashevich.dtos.HotelShortenedDto;
+import com.gpsolutions.lukashevich.dtos.SearchDto;
 import com.gpsolutions.lukashevich.services.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,6 +42,6 @@ public class SearchController {
             @RequestParam(value = "amenities", required = false)
             String amenities
     ) {
-        return ResponseEntity.ok(searchService.searchHotels(name, brand, city, country, amenities));
+        return ResponseEntity.ok(searchService.searchHotels(new SearchDto(name, brand, city, country, amenities)));
     }
 }
