@@ -8,17 +8,21 @@ import lombok.Value;
 @Value
 public class HotelShortenedDto {
     Long id;
+
     @NotNull(message = "Name can't be null.")
     @NotEmpty(message = "Name can't be empty.")
     @NotBlank(message = "Name can't be empty.")
     String name;
+
     @NotEmpty(message = "Description can't be empty.")
     @NotBlank(message = "Description can't be empty.")
     String description;
+
     @NotNull(message = "Address can't be null.")
     @NotBlank(message = "Address can't be empty.")
     @NotEmpty(message = "Address can't be empty.")
     String address;
+
     @NotNull(message = "Phone can't be null.")
     String phone;
 }
