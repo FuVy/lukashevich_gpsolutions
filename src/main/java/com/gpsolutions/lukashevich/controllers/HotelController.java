@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,10 @@ public class HotelController {
     private final HotelService hotelService;
 
     @Operation(summary = "Get all hotels")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+    @ApiResponses(
+            value = {
+            @ApiResponse(
+                    responseCode = "200",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = HotelShortenedDto[].class)))
     })
@@ -33,8 +36,10 @@ public class HotelController {
     }
 
     @Operation(summary = "Get full hotel information by ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+    @ApiResponses(
+            value = {
+            @ApiResponse(
+                    responseCode = "200",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = HotelFullDto.class))),
             @ApiResponse(responseCode = "404", description = "Unknown hotel id.")
@@ -45,8 +50,10 @@ public class HotelController {
     }
 
     @Operation(summary = "Add a new hotel")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+    @ApiResponses(
+            value = {
+            @ApiResponse(
+                    responseCode = "200",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = HotelShortenedDto.class))),
             @ApiResponse(responseCode = "400")
@@ -61,6 +68,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.addHotel(hotel));
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Add amenities to a hotel",
             description = "Adds a list of amenities to an existing hotel.")
     @ApiResponses(value = {
@@ -69,7 +77,7 @@ public class HotelController {
             @ApiResponse(responseCode = "404", description = "Unknown hotel id.")
     })
     @PostMapping("/{id}/amenities")
-    public ResponseEntity<?> addAmenities(
+    public void addAmenities(
             @PathVariable("id")
             Long id,
             @NotNull(message = "Request can't be null.")
@@ -78,6 +86,5 @@ public class HotelController {
             AddAmenitiesRequest request
     ) {
         hotelService.addAmenities(id, request);
-        return ResponseEntity.noContent().build();
     }
 }
