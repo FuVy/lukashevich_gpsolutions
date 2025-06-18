@@ -6,7 +6,7 @@ import com.gpsolutions.lukashevich.entity.*;
 import com.gpsolutions.lukashevich.mapper.HotelMapper;
 import com.gpsolutions.lukashevich.repository.HotelRepository;
 import com.gpsolutions.lukashevich.repository.specification.HotelSpecificationMapper;
-import com.gpsolutions.lukashevich.service.Jpa.SearchServiceImpl;
+import com.gpsolutions.lukashevich.service.jpa.SearchServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

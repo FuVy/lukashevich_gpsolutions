@@ -2,7 +2,7 @@ package com.gpsolutions.lukashevich.service;
 
 import com.gpsolutions.lukashevich.repository.HotelAmenityItemRepository;
 import com.gpsolutions.lukashevich.repository.HotelRepository;
-import com.gpsolutions.lukashevich.service.Jpa.HistogramServiceImpl;
+import com.gpsolutions.lukashevich.service.jpa.HistogramServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

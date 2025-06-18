@@ -2,7 +2,7 @@ package com.gpsolutions.lukashevich.service;
 
 import com.gpsolutions.lukashevich.entity.Amenity;
 import com.gpsolutions.lukashevich.repository.AmenityRepository;
-import com.gpsolutions.lukashevich.service.Jpa.AmenityServiceImpl;
+import com.gpsolutions.lukashevich.service.jpa.AmenityServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

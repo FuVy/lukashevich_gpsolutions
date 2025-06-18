@@ -1,4 +1,4 @@
-package com.gpsolutions.lukashevich.service.Jpa;
+package com.gpsolutions.lukashevich.service.jpa;
 
 import com.gpsolutions.lukashevich.dto.HotelShortenedDto;
 import com.gpsolutions.lukashevich.dto.SearchDto;
