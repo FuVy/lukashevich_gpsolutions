@@ -23,7 +23,7 @@ public class Amenity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "amenity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "amenity", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private Set<HotelAmenityItem> amenities = new HashSet<>();
 

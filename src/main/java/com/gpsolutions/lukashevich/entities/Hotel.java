@@ -39,7 +39,7 @@ public class Hotel {
     @Embedded
     private ArrivalTime arrivalTime;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<HotelAmenityItem> amenities = new ArrayList<>();
 }
