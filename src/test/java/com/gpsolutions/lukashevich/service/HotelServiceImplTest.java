@@ -193,7 +193,7 @@ class HotelServiceImplTest {
     @Test
     void addAmenities_publicMethod_validRequest_shouldAddAmenities() {
         Long hotelId = 1L;
-        AddAmenitiesRequest request = new AddAmenitiesRequest(List.of("Spa", "Restaurant"));
+        List<String> amenities = List.of("Spa", "Restaurant");
         Hotel hotel = createTestHotel(hotelId, "Existing Hotel", "Brand X", "Desc X");
         hotel.setAmenities(new ArrayList<>());
 
@@ -211,7 +211,7 @@ class HotelServiceImplTest {
         when(hotelAmenityItemRepository.saveAll(anyList())).thenReturn(List.of(hotelSpa, hotelRestaurant));
         when(hotelRepository.save(any(Hotel.class))).thenReturn(hotel);
 
-        hotelService.addAmenities(hotelId, request);
+        hotelService.addAmenities(hotelId, amenities);
 
         assertThat(hotel.getAmenities()).hasSize(2);
         assertThat(hotel.getAmenities()).extracting(item -> item.getAmenity().getName()).containsExactlyInAnyOrder("Spa", "Restaurant");
@@ -224,12 +224,12 @@ class HotelServiceImplTest {
     @Test
     void addAmenities_publicMethod_hotelNotFound_shouldThrowNotFoundException() {
         Long hotelId = 999L;
-        AddAmenitiesRequest request = new AddAmenitiesRequest(List.of("Spa"));
+        List<String> amenities = List.of("Spa");
 
         when(hotelRepository.findById(hotelId)).thenReturn(Optional.empty());
 
         NotFoundException thrown = assertThrows(NotFoundException.class, () -> {
-            hotelService.addAmenities(hotelId, request);
+            hotelService.addAmenities(hotelId, amenities);
         });
 
         assertThat(thrown.getFailedItems().get(0).getField()).isEqualTo("id");

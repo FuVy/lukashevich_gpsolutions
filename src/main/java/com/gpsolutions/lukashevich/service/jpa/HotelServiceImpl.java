@@ -1,7 +1,6 @@
 package com.gpsolutions.lukashevich.service.jpa;
 
 import com.gpsolutions.lukashevich.domain.search.FailedSearchItem;
-import com.gpsolutions.lukashevich.dto.AddAmenitiesRequest;
 import com.gpsolutions.lukashevich.dto.HotelFullDto;
 import com.gpsolutions.lukashevich.dto.HotelShortenedDto;
 import com.gpsolutions.lukashevich.entity.Amenity;
@@ -54,14 +53,14 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Transactional
-    public void addAmenities(Long id, AddAmenitiesRequest request) {
+    public void addAmenities(Long id, List<String> amenities) {
         Hotel hotel = hotelRepository.findById(id)
                         .orElseThrow(() -> new NotFoundException(List.of(new FailedSearchItem(
                                 "id",
                                 id.toString(),
                                 "Unknown hotel id."
                         ))));
-        addAmenities(hotel, request.getAmenities());
+        addAmenities(hotel, amenities);
     }
 
     @Transactional

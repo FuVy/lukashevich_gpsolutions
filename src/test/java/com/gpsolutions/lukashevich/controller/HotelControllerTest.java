@@ -201,27 +201,27 @@ class HotelControllerTest {
     @Test
     void addAmenities_validRequest_shouldReturnNoContent() throws Exception {
         Long hotelId = 1L;
-        AddAmenitiesRequest request = new AddAmenitiesRequest(List.of("Pool", "Gym"));
+        List<String> amenities = List.of("Pool", "Gym");
 
-        doNothing().when(hotelService).addAmenities(hotelId, request);
+        doNothing().when(hotelService).addAmenities(hotelId, amenities);
 
         mockMvc.perform(post("/property-view/hotels/{id}/amenities", hotelId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
+                        .content(objectMapper.writeValueAsString(amenities)))
                 .andExpect(status().isNoContent());
     }
 
     @Test
     void addAmenities_hotelNotFound_shouldReturnNotFound() throws Exception {
         Long hotelId = 999L;
-        AddAmenitiesRequest request = new AddAmenitiesRequest(List.of("Pool", "Gym"));
+        List<String> amenities = List.of("Pool", "Gym");
 
         doThrow(new NotFoundException(List.of(new FailedSearchItem("id", "999", "Unknown hotel id."))))
-                .when(hotelService).addAmenities(hotelId, request);
+                .when(hotelService).addAmenities(hotelId, amenities);
 
         mockMvc.perform(post("/property-view/hotels/{id}/amenities", hotelId)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(request)))
+                        .content(objectMapper.writeValueAsString(amenities)))
                 .andExpect(status().isNotFound());
     }
 }

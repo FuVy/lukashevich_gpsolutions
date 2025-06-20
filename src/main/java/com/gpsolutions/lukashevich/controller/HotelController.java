@@ -1,6 +1,5 @@
 package com.gpsolutions.lukashevich.controller;
 
-import com.gpsolutions.lukashevich.dto.AddAmenitiesRequest;
 import com.gpsolutions.lukashevich.dto.HotelFullDto;
 import com.gpsolutions.lukashevich.dto.HotelShortenedDto;
 import com.gpsolutions.lukashevich.service.HotelService;
@@ -15,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/property-view/hotels")
@@ -83,8 +84,8 @@ public class HotelController {
             @NotNull(message = "Request can't be null.")
             @Valid
             @RequestBody
-            AddAmenitiesRequest request
+            List<String> amenities
     ) {
-        hotelService.addAmenities(id, request);
+        hotelService.addAmenities(id, amenities);
     }
 }

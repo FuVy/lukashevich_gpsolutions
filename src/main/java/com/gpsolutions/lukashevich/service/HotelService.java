@@ -1,6 +1,5 @@
 package com.gpsolutions.lukashevich.service;
 
-import com.gpsolutions.lukashevich.dto.AddAmenitiesRequest;
 import com.gpsolutions.lukashevich.dto.HotelFullDto;
 import com.gpsolutions.lukashevich.dto.HotelShortenedDto;
 
@@ -14,5 +13,5 @@ public interface HotelService {
 
   HotelShortenedDto addHotel(HotelFullDto hotel);
 
-  void addAmenities(Long id, AddAmenitiesRequest request);
+  void addAmenities(Long id, List<String> amenities);
 }
